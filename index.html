@@ -1,139 +1,82 @@
-<!-- DEPLOY-CHECK-SELCHA-123 -->
 <!doctype html>
 <html lang="en" class="h-full">
 <head>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DJFWR1BB9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9DJFWR1BB9');
-  </script>
-
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selcha – Private Beta Notification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selcha – Private Beta</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Inter:wght@400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Beehiiv -->
-  <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Inter:wght@400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- KIT SCRIPT MUST BE OUTSIDE TEMPLATE LITERALS -->
+  <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
 
   <style>
-    body {
-      font-family: Inter, system-ui, sans-serif;
-      background-color: #f7f4ff;
-      color: #1a1a1a;
-    }
-
-    .headline {
-      font-family: "Libre Baskerville", serif;
-    }
-
-    .headline-ar,
-    .body-ar {
-      font-family: "Tajawal", Arial, sans-serif;
-    }
-
-    .lang-toggle {
-      cursor: pointer;
-      padding: 6px 14px;
-      border-radius: 8px;
-      transition: background 0.2s ease;
-    }
-
-    .lang-toggle.active {
-      background: rgba(124, 58, 237, 0.15);
-      font-weight: 600;
-    }
-
-    .beehiiv-frame {
-      width: 100%;
-      max-width: 560px;
-      height: 527px;
-      border: none;
-    }
+    body { font-family: Inter, sans-serif; background:#f7f4ff; }
+    .headline-font { font-family: 'Libre Baskerville', serif; }
+    .body-font-ar { font-family: 'Tajawal', sans-serif; }
   </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center px-6">
+<body class="h-full">
+  <div id="app" class="min-h-full flex items-center justify-center px-6"></div>
 
-  <main class="w-full max-w-2xl text-center">
+<script>
+const content = {
+  en: {
+    headline: "Save more. Search less.",
+    subheadline: "Selcha is an AI-powered shopping assistant built for shoppers in the GCC.",
+    trust: "Private beta • Limited invites • Unsubscribe anytime"
+  },
+  ar: {
+    headline: "وفّر أكثر. ابحث أقل.",
+    subheadline: "سيلتشا هو مساعد تسوق ذكي مصمم لمتسوقي دول الخليج.",
+    trust: "نسخة تجريبية خاصة • دعوات محدودة • إلغاء الاشتراك في أي وقت"
+  }
+};
 
-    <!-- Language Toggle -->
-    <div class="flex justify-center gap-3 mb-8">
-      <button class="lang-toggle active" onclick="setLang('en', this)">English</button>
-      <button class="lang-toggle" onclick="setLang('ar', this)">العربية</button>
+let lang = "en";
+
+function render() {
+  const c = content[lang];
+  const isAr = lang === "ar";
+
+  document.getElementById("app").innerHTML = `
+    <div class="${isAr ? 'rtl body-font-ar' : 'ltr'} w-full max-w-xl text-center">
+
+      <h1 class="headline-font text-5xl font-bold mb-6">
+        ${c.headline}
+      </h1>
+
+      <p class="text-lg opacity-80 mb-10">
+        ${c.subheadline}
+      </p>
+
+      <div class="bg-white p-6 rounded-2xl shadow max-w-md mx-auto">
+        <form
+          action="https://app.kit.com/forms/8868152/subscriptions"
+          method="post"
+          data-sv-form="8868152"
+          data-uid="12295d3168"
+          data-format="inline"
+          data-version="5"
+          class="seva-form formkit-form">
+        </form>
+      </div>
+
+      <p class="text-sm opacity-60 mt-4">
+        ${c.trust}
+      </p>
+
     </div>
+  `;
+}
 
-    <!-- Headline -->
-    <h1 id="headline" class="headline text-5xl mb-6">
-      Save more. Search less.
-    </h1>
-
-    <p id="subheadline" class="text-lg mb-10 opacity-80">
-      Selcha is an AI-powered shopping assistant built for the GCC.
-      No ads. No endless scrolling. Just smart savings.
-    </p>
-
-    <!-- Beehiiv Form -->
-    <iframe
-      src="https://subscribe-forms.beehiiv.com/05210ab6-b863-44fd-a2c3-932fa4e8f7eb"
-      class="beehiiv-frame mx-auto"
-      scrolling="no"
-      title="Selcha private beta notification signup">
-    </iframe>
-
-    <p class="text-sm mt-4 opacity-60">
-      Private beta • Limited invites • Unsubscribe anytime
-    </p>
-
-    <footer class="mt-16 text-xs opacity-50">
-      By joining, you agree to receive early updates from Selcha.
-    </footer>
-  </main>
-
-  <!-- Beehiiv Attribution -->
-  <script async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
-
-  <!-- Language Logic -->
-  <script>
-    const copy = {
-      en: {
-        headline: "Save more. Search less.",
-        sub: "Selcha is an AI-powered shopping assistant built for the GCC. No ads. No endless scrolling. Just smart savings.",
-        headlineClass: "headline",
-        bodyClass: ""
-      },
-      ar: {
-        headline: "وفّر أكثر. ابحث أقل.",
-        sub: "سيلتشا مساعد تسوق ذكي مصمم لدول الخليج. بدون إعلانات. بدون تصفح لا نهاية له. فقط توفير ذكي.",
-        headlineClass: "headline-ar",
-        bodyClass: "body-ar"
-      }
-    };
-
-    function setLang(lang, el) {
-      document.getElementById("headline").textContent = copy[lang].headline;
-      document.getElementById("subheadline").textContent = copy[lang].sub;
-
-      document.getElementById("headline").className =
-        copy[lang].headlineClass + " text-5xl mb-6";
-
-      document.getElementById("subheadline").className =
-        copy[lang].bodyClass + " text-lg mb-10 opacity-80";
-
-      document.querySelectorAll(".lang-toggle").forEach(b =>
-        b.classList.remove("active")
-      );
-      el.classList.add("active");
-    }
-  </script>
+render();
+</script>
 
 </body>
 </html>
