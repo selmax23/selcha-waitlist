@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="h-full">
 <head>
-  <!-- Google tag -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DJFWR1BB9"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -22,107 +22,117 @@
 
   <style>
     body { font-family: Inter, system-ui, sans-serif; }
-    .headline-font { font-family: "Libre Baskerville", serif; }
-    .headline-font-ar { font-family: Tajawal, Arial, sans-serif; }
-    .body-font-ar { font-family: Tajawal, Arial, sans-serif; }
-    .lang-toggle { cursor:pointer; padding:.5rem 1rem; border-radius:8px; }
-    .lang-toggle.active { background:rgba(124,58,237,.15); font-weight:600; }
+    .headline-en { font-family: "Libre Baskerville", serif; }
+    .headline-ar, .body-ar { font-family: Tajawal, Arial, sans-serif; }
+    .lang-toggle { cursor:pointer; padding:.4rem .9rem; border-radius:8px; }
+    .lang-toggle.active { background:#ede9fe; font-weight:600; }
     .rtl { direction:rtl; }
-    .ltr { direction:ltr; }
   </style>
 </head>
 
-<body class="h-full">
+<body class="bg-[#f7f4ff]">
 
-  <!-- 🔑 KIT SCRIPT MUST EXIST AT LOAD -->
-  <script async data-uid="12295d3168" src="https://selcha.kit.com/12295d3168/index.js"></script>
+  <div class="min-h-screen flex items-center justify-center px-6">
+    <div class="max-w-2xl w-full text-center">
 
-  <div id="app" class="w-full h-full"></div>
+      <!-- Language Toggle -->
+      <div class="mb-8">
+        <span id="btn-en" class="lang-toggle active" onclick="setLang('en')">English</span>
+        |
+        <span id="btn-ar" class="lang-toggle" onclick="setLang('ar')">العربية</span>
+      </div>
 
-  <script>
-    const content = {
-      en: {
-        headline: "Save more. Search less.",
-        subheadline:
-          "Selcha is an AI-powered shopping assistant that finds the best deals for you — instantly. Built for shoppers in the GCC. No ads. No endless scrolling. Just smart savings.",
-        trust: "Private beta • Limited invites • Unsubscribe anytime",
-        whyTitle: "Why a private beta?",
-        whyDesc:
-          "We're launching Selcha in a controlled private beta to ensure quality, reliability, and the best possible experience.\n\nYou'll be notified by email when private beta access opens.",
-        footer:
-          "By joining, you agree to receive early product updates from Selcha. We respect your privacy."
-      },
-      ar: {
-        headline: "وفّر أكثر. ابحث أقل.",
-        subheadline:
-          "سيلتشا هو مساعد تسوق ذكي يعمل بالذكاء الاصطناعي يجد لك أفضل العروض — بشكل فوري. مصمم للمتسوقين في دول الخليج. بدون إعلانات. بدون تصفح لا نهاية له. فقط توفير ذكي.",
-        trust: "نسخة تجريبية خاصة • دعوات محدودة • إلغاء الاشتراك في أي وقت",
-        whyTitle: "لماذا نسخة تجريبية خاصة؟",
-        whyDesc:
-          "نطلق سيلتشا في نسخة تجريبية خاصة ومحكومة لضمان الجودة والموثوقية وأفضل تجربة ممكنة.\n\nسيتم إخطارك عبر البريد الإلكتروني عند فتح النسخة التجريبية الخاصة، حتى تتمكن من تجربة سيلتشا في أقرب وقت ممكن.",
-        footer:
-          "بالانضمام، أنت توافق على تلقي تحديثات المنتج المبكرة من سيلتشا. نحن نحترم خصوصيتك."
-      }
-    };
+      <!-- ENGLISH -->
+      <div id="content-en">
+        <h1 class="headline-en text-5xl font-bold mb-6">
+          Save more. Search less.
+        </h1>
 
-    let lang = "en";
+        <p class="text-xl leading-relaxed opacity-85 mb-8">
+          Selcha is an AI-powered shopping assistant that finds the best deals for you — instantly.
+          Built for shoppers in the GCC. No ads. No endless scrolling. Just smart savings.
+        </p>
+      </div>
 
-    function render() {
-      const c = content[lang];
-      const dir = lang === "ar" ? "rtl" : "ltr";
-      const hFont = lang === "ar" ? "headline-font-ar" : "headline-font";
-      const bFont = lang === "ar" ? "body-font-ar" : "";
+      <!-- ARABIC -->
+      <div id="content-ar" class="hidden rtl body-ar">
+        <h1 class="headline-ar text-5xl font-bold mb-6">
+          وفّر أكثر. ابحث أقل.
+        </h1>
 
-      document.getElementById("app").innerHTML = `
-        <div class="${dir}" style="min-height:100%;display:flex;justify-content:center;align-items:center;padding:2rem;">
-          <div style="max-width:42rem;width:100%;text-align:center;">
+        <p class="text-xl leading-relaxed opacity-85 mb-8">
+          سيلتشا هو مساعد تسوق ذكي يعمل بالذكاء الاصطناعي يجد لك أفضل العروض — بشكل فوري.
+          مصمم للمتسوقين في دول الخليج. بدون إعلانات. بدون تصفح لا نهاية له. فقط توفير ذكي.
+        </p>
+      </div>
 
-            <div style="margin-bottom:2rem;">
-              <span class="lang-toggle ${lang==="en"?"active":""}" onclick="setLang('en')">English</span> |
-              <span class="lang-toggle ${lang==="ar"?"active":""}" onclick="setLang('ar')">العربية</span>
-            </div>
-
-            <h1 class="${hFont} ${bFont}" style="font-size:3rem;font-weight:700;margin-bottom:1.5rem;">
-              ${c.headline}
-            </h1>
-
-            <p class="${bFont}" style="font-size:1.25rem;line-height:1.7;opacity:.85;margin-bottom:2rem;">
-              ${c.subheadline}
-            </p>
-
-            <!-- ⬇️ KIT FORM RENDERS RIGHT HERE -->
-            <div style="margin-bottom:1.5rem;"></div>
-
-            <p class="${bFont}" style="font-size:.9rem;opacity:.6;margin-bottom:3rem;">
-              ${c.trust}
-            </p>
-
-            <div style="border-top:1px solid rgba(0,0,0,.1);padding-top:2.5rem;">
-              <h2 class="${bFont}" style="font-size:1.5rem;font-weight:600;margin-bottom:1rem;">
-                ${c.whyTitle}
-              </h2>
-              <p class="${bFont}" style="white-space:pre-line;opacity:.75;line-height:1.7;">
-                ${c.whyDesc}
-              </p>
-            </div>
-
-            <footer style="margin-top:3rem;border-top:1px solid rgba(0,0,0,.1);padding-top:1.5rem;">
-              <p class="${bFont}" style="font-size:.85rem;opacity:.6;">
-                ${c.footer}
-              </p>
-            </footer>
-
-          </div>
+      <!-- ✅ KIT FORM — CENTERED & IN THE RIGHT PLACE -->
+      <div class="flex justify-center mb-4">
+        <div class="w-full max-w-md">
+          <script async data-uid="12295d3168" src="https://selcha.kit.com/12295d3168/index.js"></script>
         </div>
-      `;
-    }
+      </div>
 
-    function setLang(l) {
-      lang = l;
-      render();
-    }
+      <!-- Trust copy -->
+      <p id="trust-en" class="text-sm opacity-60 mb-10">
+        Private beta • Limited invites • Unsubscribe anytime
+      </p>
+      <p id="trust-ar" class="text-sm opacity-60 mb-10 hidden rtl body-ar">
+        نسخة تجريبية خاصة • دعوات محدودة • إلغاء الاشتراك في أي وقت
+      </p>
 
-    render();
+      <!-- Why -->
+      <div class="border-t border-black/10 pt-8">
+        <h2 id="why-title-en" class="text-2xl font-semibold mb-3">
+          Why a private beta?
+        </h2>
+        <p id="why-text-en" class="opacity-75 leading-relaxed">
+          We're launching Selcha in a controlled private beta to ensure quality, reliability,
+          and the best possible experience.<br><br>
+          You'll be notified by email when private beta access opens.
+        </p>
+
+        <h2 id="why-title-ar" class="hidden rtl body-ar text-2xl font-semibold mb-3">
+          لماذا نسخة تجريبية خاصة؟
+        </h2>
+        <p id="why-text-ar" class="hidden rtl body-ar opacity-75 leading-relaxed">
+          نطلق سيلتشا في نسخة تجريبية خاصة ومحكومة لضمان الجودة والموثوقية وأفضل تجربة ممكنة.<br><br>
+          سيتم إخطارك عبر البريد الإلكتروني عند فتح النسخة التجريبية الخاصة.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <footer class="border-t border-black/10 mt-10 pt-6">
+        <p id="footer-en" class="text-sm opacity-60">
+          By joining, you agree to receive early product updates from Selcha. We respect your privacy.
+        </p>
+        <p id="footer-ar" class="hidden rtl body-ar text-sm opacity-60">
+          بالانضمام، أنت توافق على تلقي تحديثات المنتج المبكرة من سيلتشا. نحن نحترم خصوصيتك.
+        </p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Language Switch -->
+  <script>
+    function setLang(lang) {
+      document.getElementById("content-en").classList.toggle("hidden", lang !== "en");
+      document.getElementById("trust-en").classList.toggle("hidden", lang !== "en");
+      document.getElementById("why-title-en").classList.toggle("hidden", lang !== "en");
+      document.getElementById("why-text-en").classList.toggle("hidden", lang !== "en");
+      document.getElementById("footer-en").classList.toggle("hidden", lang !== "en");
+
+      document.getElementById("content-ar").classList.toggle("hidden", lang !== "ar");
+      document.getElementById("trust-ar").classList.toggle("hidden", lang !== "ar");
+      document.getElementById("why-title-ar").classList.toggle("hidden", lang !== "ar");
+      document.getElementById("why-text-ar").classList.toggle("hidden", lang !== "ar");
+      document.getElementById("footer-ar").classList.toggle("hidden", lang !== "ar");
+
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      document.getElementById("btn-ar").classList.toggle("active", lang === "ar");
+    }
   </script>
+
 </body>
 </html>
